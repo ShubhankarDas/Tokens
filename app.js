@@ -2,8 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bluebird = require('bluebird')
 const dotenv = require('dotenv')
-// const redis = require('redis')
-
+const cron = require('./cron')
 // Controllers
 const tokenController = require('./controllers/TokenController')
 
@@ -11,15 +10,6 @@ const tokenController = require('./controllers/TokenController')
 dotenv.load({
   path: '.env'
 });
-
-// // Convert redis to promises
-// bluebird.promisifyAll(redis);
-
-// // Create redis client
-// let client = redis.createClient()
-// client.on('connect', ()=>{
-//   console.log('Connected to redis')
-// })
 
 // set port
 const port = process.env.PORT || 3000
@@ -57,3 +47,6 @@ app.get('/token/:token/refresh/:admin', tokenController.refreshToken)
 app.listen(port,()=>{
   console.log(`listening on port - ${port}...`)
 })
+
+// Start cron for refreshing tokens from blocked to unblocked and delete expired tokens
+cron.start()

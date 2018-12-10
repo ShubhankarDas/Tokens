@@ -13,7 +13,7 @@ exports.generateToken = async (req, res, next) => {
   newToken.tokenKey = randomKey;
   newToken.blocked = false;
   newToken.save();
-  res.send(randomKey);
+  res.status(200).send(randomKey);
 };
 
 // get free token
@@ -51,9 +51,9 @@ exports.assignToken = async (req, res, next) => {
     if(token)
       res.send(token)
     else
-      res.send('No token available')
+      res.status(404).send('No token available')
   })
-  .catch(err => res.send('No token available'))
+  .catch(err => res.status(404).send('No token available'))
 };
 
 // Unblock a token
@@ -66,7 +66,9 @@ exports.unblockToken = async (req, res, next) =>
   }, {
     isBlocked: false
   })
-  .then(token => res.send(token ? `${token.tokenKey} is now free` : 'invalid token'))
+  .then(token => token
+    ? res.send(`${token.tokenKey} is now free`)
+    : res.status(404).send(`Invalid token id`))
 
 
 // delete a token
@@ -118,7 +120,7 @@ exports.refreshToken = async (req, res, next) => {
         }
       }
     }
-    res.send('Invalid token id')
+    res.status(404).send('Invalid token id')
   });
 };
 
