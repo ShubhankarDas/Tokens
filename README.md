@@ -11,6 +11,8 @@ GET - /token/:token/unblock - Frees a blocked token. Takes tokenId as param.<br 
 GET - /token/:token/delete - Deletes a token from the pool irrespective of its state(blocked/free). Takes tokenId as param.<br />
 GET - /token/:token/refresh/:admin - Keep-alive call for the tokens. Takes tokenId and admin(0/1) as param. 0 - client 1 - admin<br />
 
+- https://www.getpostman.com/collections/9713f8fe8d392e656e42
+
 ## Dev Stack
 - <b>Express</b> for creating the server structure 
 - <b>Redis</b> for accessing redis
