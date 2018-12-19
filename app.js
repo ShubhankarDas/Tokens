@@ -44,6 +44,3 @@ app.get('/token/:token/refresh/:admin', middleware, tokenController.refreshToken
 app.listen(port,()=>{
   console.log(`listening on port - ${port}...`)
 })
-
-// Start cron for refreshing tokens from blocked to unblocked and delete expired tokens
-cron.start()
