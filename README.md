@@ -13,6 +13,6 @@ GET - /token/:token/refresh/:admin - Keep-alive call for the tokens. Takes token
 
 ## Dev Stack
 - <b>Express</b> for creating the server structure 
-- <b>Redis</b> for accessing MongoDb
+- <b>Redis</b> for accessing redis
 - <b>Bluebird</b> for converting all the mongoose calls into promises 
 - <b>Node-cron</b> for scheduling a cron job
